@@ -20,6 +20,11 @@ import AdminRoute from './components/auth/AdminRoute';
 import OrderSuccess from './pages/OrderSuccess';
 import Wishlist from './pages/Wishlist';
 import NotFound from './pages/NotFound';
+import FAQ from './pages/FAQ';
+import ShippingPolicy from './pages/ShippingPolicy';
+import ReturnsPolicy from './pages/ReturnsPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -37,6 +42,11 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/shipping" element={<ShippingPolicy />} />
+              <Route path="/returns" element={<ReturnsPolicy />} />
+              <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
               
               {/* Protected routes for authenticated users */}
               <Route element={<ProtectedRoute />}>
