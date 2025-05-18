@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { mockProducts } from '../../data/mockData';
+const BASE_URL = 'http://localhost:5000/api'; // Replace with your actual API URL
 
 export interface Product {
   id: string;
@@ -8,7 +9,7 @@ export interface Product {
   price: number;
   image: string;
   images: string[];
-  category: string;
+  category: Category;
   subcategory: string;
   rating: number;
   reviewCount: number;
@@ -16,6 +17,12 @@ export interface Product {
   brand: string;
   featured: boolean;
 }
+
+interface Category {
+  id: string;
+  name: string;
+}
+
 
 interface ProductsState {
   products: Product[];
@@ -59,11 +66,11 @@ export const fetchProducts = createAsyncThunk(
     try {
       // In a real app, this would be an API call
       // For demo purposes, using mock data
-      return await new Promise<Product[]>((resolve) => {
-        setTimeout(() => {
-          resolve(mockProducts);
-        }, 500);
-      });
+      return await fetch(`${BASE_URL}/v1/products`)
+        .then((response) => response.json())
+        .then((data) => {
+          return data.data;
+        }); 
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }
@@ -95,7 +102,10 @@ const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    setFilter: (state, action: PayloadAction<{ key: keyof ProductsState['filters']; value: any }>) => {
+    setFilter: <K extends keyof ProductsState['filters']>(
+      state: ProductsState,
+      action: PayloadAction<{ key: K; value: ProductsState['filters'][K] }>
+    ) => {
       state.filters[action.payload.key] = action.payload.value;
     },
     
@@ -118,7 +128,7 @@ const productSlice = createSlice({
         const brands = new Set<string>();
         
         action.payload.forEach(product => {
-          categories.add(product.category);
+          categories.add(product.category.name);
           brands.add(product.brand);
         });
         

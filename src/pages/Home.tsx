@@ -8,7 +8,7 @@ import Notification from '../components/ui/Notification';
 import { ArrowRight } from 'lucide-react';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const { products, loading, error } = useSelector((state: RootState) => state.products);
 
   useEffect(() => {

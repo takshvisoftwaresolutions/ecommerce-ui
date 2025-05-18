@@ -9,7 +9,7 @@ import Notification from '../components/ui/Notification';
 import { Filter as FilterIcon, X, SlidersHorizontal } from 'lucide-react';
 
 const ProductList: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const { category } = useParams<{ category?: string }>();
   const [searchParams] = useSearchParams();
   const { products, loading, error, filters } = useSelector((state: RootState) => state.products);

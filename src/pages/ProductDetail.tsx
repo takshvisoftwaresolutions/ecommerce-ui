@@ -11,7 +11,7 @@ import { ShoppingCart, Heart, Check, Truck, RotateCcw, Shield, ArrowLeft } from 
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const { product, loading, error, products } = useSelector((state: RootState) => state.products);
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const isInWishlist = wishlistItems.some(item => item.id === id);
@@ -132,8 +132,8 @@ const ProductDetail: React.FC = () => {
           {/* Product Info */}
           <div className="lg:w-1/2">
             <div className="mb-2">
-              <Link to={`/products/${product.category.toLowerCase()}`} className="text-sm text-blue-600 hover:text-blue-800">
-                {product.category}
+              <Link to={`/products/${product.category.name.toLowerCase()}`} className="text-sm text-blue-600 hover:text-blue-800">
+                {product.category.name}
               </Link>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mt-2">{product.name}</h1>
             </div>

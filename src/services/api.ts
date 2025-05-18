@@ -131,6 +131,76 @@ export const api = {
     },
   },
   
+  products: {
+    getAll: async () => {
+
+      // Implement Actual API call
+
+      return new Promise((resolve) => {
+        setTimeout(() => {  
+          resolve([
+            { id: '1', name: 'Product 1', price: 99.99, category: 'Electronics' },
+            { id: '2', name: 'Product 2', price: 49.99, category: 'Books' },
+            { id: '3', name: 'Product 3', price: 149.99, category: 'Clothing' },
+          ]);
+        } 
+        , 500);
+      });
+    },
+
+    getById: async (id: string) => {
+      // Simulate API call
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (id === '1') {
+            resolve({
+              id: '1',
+              name: 'Product 1',
+              price: 99.99,
+              description: 'This is a great product.',
+              category: 'Electronics',
+              stock: 10,
+            });
+          } else {
+            reject(new Error('Product not found'));
+          }
+        }, 300);
+      });
+    },
+    create: async (productData: any) => {
+      // Simulate API call
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+
+            id: `product-${Date.now()}`,
+            ...productData,
+          });
+        }, 800);
+      });
+    },
+    update: async (id: string, productData: any) => {
+      // Simulate API call
+      return new Promise((resolve) => {
+        setTimeout(() => {    
+          resolve({
+            id,
+            ...productData,
+          });
+        }
+        , 800);
+      });
+    },
+    delete: async (id: string) => {
+      // Simulate API call
+      return new Promise((resolve) => {   
+        setTimeout(() => {
+          resolve({ success: true });
+        }, 800);
+      }
+      );
+    },
+  },
   // Payment endpoints (would connect to Razorpay in a real app)
   payments: {
     createOrder: async (amount: number) => {

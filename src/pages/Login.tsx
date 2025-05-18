@@ -10,7 +10,7 @@ interface LocationState {
 }
 
 const Login: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const location = useLocation();
   const { loading, error, user } = useSelector((state: RootState) => state.auth);

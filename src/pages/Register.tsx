@@ -6,7 +6,7 @@ import { RootState } from '../store';
 import { User, Mail, Lock, AlertCircle, Check, X } from 'lucide-react';
 
 const Register: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const { loading, error, user } = useSelector((state: RootState) => state.auth);
   
